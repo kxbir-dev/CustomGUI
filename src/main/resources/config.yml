@@ -1,0 +1,207 @@
+# =====================================================
+# CustomGUI example config
+# =====================================================
+# Each top-level key is the GUI's internal name.
+#
+# Per-GUI fields:
+#   command:     /<command>          — command players type to open the GUI
+#   permission:  <permission>        — auto-registered at startup
+#   title:       "<title>"           — top of inventory (color codes & work)
+#   gui-slots:   9x<vertical>        — 9x1 .. 9x6 (width must be 9)
+#   items:
+#     <item-name>:
+#       material:      <MATERIAL_NAME>
+#       name:          "<display name>"
+#       slot:          <number>
+#       lore:                          (YAML list of lines)
+#         - "&5line1"
+#         - "&8line2"
+#       enchanted:     <true|false>           (glow effect)
+#       close-on-click: <true|false>          (whether GUI closes when clicked)
+#       action-type:   <command|message|both|none>
+#       message:                         (used when action-type is message/both)
+#         - "&aHello <player>"
+#       command:       "<command>"             (no slash needed)
+#       command-type:  <PLAYER|CONSOLE>         (used when action-type is command/both)
+#
+# Action types:
+#   command → run command only
+#   message → send message only
+#   both    → send message, then run command
+#   none    → decorative, no action (close-on-click still works)
+#
+# Placeholders:
+#   <player>  → replaced with the player's name (in both message and command)
+#
+# Legacy format (still supported for backwards compatibility):
+#       item-command: "[PLAYER]/spawn" or "[CONSOLE]/give <player> x"
+# =====================================================
+
+server-selector:
+  command: /servers
+  permission: gui.serverselector
+  title: "&6&lServer Selector"
+  gui-slots: 9x3
+  items:
+    survival:
+      material: DIAMOND_SWORD
+      name: "&aSurvival Server"
+      slot: 11
+      lore:
+        - "&5Click to join Survival"
+        - "&8Players online: 50"
+      enchanted: true
+      close-on-click: true
+      action-type: command
+      command: "server survival"
+      command-type: PLAYER
+    creative:
+      material: GOLD_BLOCK
+      name: "&bCreative Server"
+      slot: 13
+      lore:
+        - "&5Click to join Creative"
+      enchanted: false
+      close-on-click: true
+      action-type: command
+      command: "server creative"
+      command-type: PLAYER
+    skyblock:
+      material: GRASS
+      name: "&eSkyblock"
+      slot: 15
+      lore:
+        - "&5Click to join Skyblock"
+      enchanted: false
+      close-on-click: true
+      action-type: command
+      command: "server skyblock"
+      command-type: PLAYER
+    info:
+      material: BOOK
+      name: "&eServer Info"
+      slot: 20
+      lore:
+        - "&7Click to see server info"
+      enchanted: false
+      close-on-click: false
+      action-type: message
+      message:
+        - "&6=== Server Info ==="
+        - "&aVersion: &f1.8.8"
+        - "&aOnline: &f50"
+        - "&aDiscord: &fdiscord.gg/example"
+    border-1:
+      material: STAINED_GLASS_PANE
+      name: " "
+      slot: 0
+      lore: []
+      enchanted: false
+      close-on-click: false
+      action-type: none
+    close:
+      material: BARRIER
+      name: "&cClose"
+      slot: 22
+      lore:
+        - "&7Close this menu"
+      enchanted: false
+      close-on-click: true
+      action-type: command
+      command: "closemenu"
+      command-type: PLAYER
+
+main-menu:
+  command: /main
+  permission: gui.mainmenu
+  title: "&6&lMain Menu"
+  gui-slots: 9x3
+  items:
+    servers-button:
+      material: COMPASS
+      name: "&eServer Selector"
+      slot: 11
+      lore:
+        - "&5Open the server selector"
+      enchanted: true
+      close-on-click: true
+      action-type: command
+      command: "servers"
+      command-type: PLAYER
+    daily-kit:
+      material: CHEST
+      name: "&6Daily Kit"
+      slot: 13
+      lore:
+        - "&5Claim your daily kit"
+        - "&8Once per day"
+      enchanted: true
+      close-on-click: true
+      action-type: both
+      message:
+        - "&a+ You received the daily kit!"
+        - "&7Enjoy!"
+      command: "kit give <player> daily"
+      command-type: CONSOLE
+    info:
+      material: BOOK
+      name: "&eInfo"
+      slot: 15
+      lore:
+        - "&7View server info"
+      enchanted: false
+      close-on-click: false
+      action-type: message
+      message:
+        - "&6=== Info ==="
+        - "&aWelcome to the server!"
+    border:
+      material: STAINED_GLASS_PANE
+      name: " "
+      slot: 0
+      lore: []
+      enchanted: false
+      close-on-click: false
+      action-type: none
+
+admin-menu:
+  command: /admin
+  permission: gui.admin
+  title: "&4&lAdmin Menu"
+  gui-slots: 9x1
+  items:
+    reload:
+      material: PAPER
+      name: "&cReload Server"
+      slot: 2
+      lore:
+        - "&7Reload server config"
+      enchanted: false
+      close-on-click: true
+      action-type: command
+      command: "reload"
+      command-type: CONSOLE
+    day:
+      material: WATCH
+      name: "&eSet Day"
+      slot: 4
+      lore:
+        - "&7Set time to day"
+      enchanted: true
+      close-on-click: true
+      action-type: command
+      command: "time set day"
+      command-type: PLAYER
+    op-me:
+      material: COMMAND
+      name: "&4Give OP"
+      slot: 6
+      lore:
+        - "&7Give yourself OP"
+      enchanted: false
+      close-on-click: true
+      action-type: both
+      message:
+        - "&cYou now have OP!"
+      command: "op <player>"
+      command-type: CONSOLE

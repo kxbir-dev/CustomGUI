@@ -1,0 +1,20 @@
+name: CustomGUI
+version: 1.0.0
+main: com.example.customgui.CustomGUIPlugin
+api-version: 1.8
+author: kxbir
+description: Create custom GUIs from config.yml (Java 17 / MC 1.8.8)
+
+commands:
+  closemenu:
+    description: Close the currently open CustomGUI inventory
+    usage: /closemenu
+  customgui:
+    description: Admin command for CustomGUI (reload)
+    usage: /customgui reload
+    permission: customgui.admin
+
+permissions:
+  customgui.admin:
+    description: Allows reloading the CustomGUI config
+    default: op
